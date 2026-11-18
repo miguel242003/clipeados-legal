@@ -1,0 +1,13 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer"><title>Conectando con Clipeados Studio</title>
+<style>body{font-family:-apple-system,system-ui,sans-serif;max-width:560px;margin:60px auto;padding:0 16px;color:#111;background:#fff}</style></head>
+<body><p id="m">Volviendo a Clipeados Studio…</p>
+<script>
+// Facebook exige https para localhost como Redirect URI: esta página reenvía la respuesta a la app local.
+(function () {
+  var q = new URLSearchParams(location.search), out = new URLSearchParams();
+  ["code", "state", "error", "error_reason", "error_description"].forEach(function (k) { if (q.has(k)) out.set(k, q.get(k)); });
+  if (!out.has("state")) { document.getElementById("m").textContent = "Falta información de Facebook. Vuelve a pulsar «Conectar página de Facebook» en la app."; return; }
+  location.replace("http://localhost:8000/api/facebook/callback?" + out.toString());
+})();
+</script></body></html>
